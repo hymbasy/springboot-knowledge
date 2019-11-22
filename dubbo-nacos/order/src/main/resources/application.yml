@@ -1,0 +1,36 @@
+server:
+  port: 8803
+
+spring:
+  datasource:
+    druid:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/miaosha?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+      username: root
+      password: 372020752
+  main:
+    # 解决Bean重复定义问题
+    allow-bean-definition-overriding: true
+  kafka:
+    topics: test
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: test-consumer
+      auto-offset-reset: latest
+dubbo:
+  # 配置服务信息
+  application:
+    name: order
+    # 禁用QOS同一台机器可能会有端口冲突现象
+    qos-enable: false
+    qos-accept-foreign-ip: false
+  # 配置注册中心
+  registry:
+    address: nacos://127.0.0.1:8848
+  # 设置超时时间
+  consumer:
+    timeout: 4000
+  protocol:
+    port: -1
+
